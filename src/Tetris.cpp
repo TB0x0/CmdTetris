@@ -7,13 +7,15 @@ using namespace std;
 #include <Windows.h>
 
 wstring blocks[7];
-int nScreenwidth = 80;
-int nScreenHeight = 30;
-int nFieldWidth = 12;   // width of playing field
-int nFieldHeight = 18;  // Height of playing field
+int screenwidth = 80;
+int screenHeight = 30;
+int fieldWidth = 12;   // width of playing field
+int fieldHeight = 18;  // Height of playing field
 unsigned char *pField = nullptr;
 
 int rotateBlock(int positionX, int positionY, int rotation);
+
+bool pieceFits(int block, int rotation, int positionX, int positionY);
 
 int main()
 {
@@ -68,4 +70,24 @@ int rotateBlock(int positionX, int positionY, int rotation){
     }
 
     return 0;
+}
+
+bool pieceFits(int block, int rotation, int positionX, int positionY){
+    for (int i = 0; i < 4; i++){
+        for(int j = 0; j < 4; j++{
+            int pieceIndex = rotateBlock(i, j, rotation);
+
+            int fieldIndex = (positionY + j) * fieldWidth + (positionX + i);
+
+            if (positionX + i >= 0 && positionX + i < fieldWidth){
+                if (positionY + j >= 0 && positionY + j < fieldHeight){
+                    if (blocks[block][pieceIndex] != L'.' && pField[fieldIndex] != 0){
+                        return false;
+                    }
+                }
+            }
+        })
+    }
+
+    return true;
 }
