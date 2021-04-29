@@ -74,7 +74,7 @@ int rotateBlock(int positionX, int positionY, int rotation){
 
 bool pieceFits(int block, int rotation, int positionX, int positionY){
     for (int i = 0; i < 4; i++){
-        for(int j = 0; j < 4; j++{
+        for(int j = 0; j < 4; j++){
             int pieceIndex = rotateBlock(i, j, rotation);
 
             int fieldIndex = (positionY + j) * fieldWidth + (positionX + i);
@@ -86,7 +86,7 @@ bool pieceFits(int block, int rotation, int positionX, int positionY){
                     }
                 }
             }
-        })
+        }
     }
 
     return true;
