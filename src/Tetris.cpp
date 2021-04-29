@@ -7,7 +7,7 @@ using namespace std;
 #include <Windows.h>
 
 wstring blocks[7];
-int screenwidth = 80;
+int screenWidth = 80;
 int screenHeight = 30;
 int fieldWidth = 12;   // width of playing field
 int fieldHeight = 18;  // Height of playing field
@@ -19,6 +19,16 @@ bool pieceFits(int block, int rotation, int positionX, int positionY);
 
 int main()
 {
+    // Code to create the screen buffer
+    int screenArea = screenWidth*screenHeight;
+    wchar_t *screen = new wchar_t[];
+    for (int i = 0; i < screenArea; i++){
+        screen[i] = L' ';
+    }
+    HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
+    SetConsoleActiveScreenBuffer(hConsole);
+    DWORD dwBytesWritten = 0;
+    
     // Game assets i.e. blocks
     blocks[0].append(L"..X.");
     blocks[0].append(L"..X.");
