@@ -2,6 +2,8 @@
 // Main tetris file
 
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
 #include <Windows.h>
@@ -28,7 +30,7 @@ int main()
     HANDLE hConsole = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, NULL, CONSOLE_TEXTMODE_BUFFER, NULL);
     SetConsoleActiveScreenBuffer(hConsole);
     DWORD dwBytesWritten = 0;
-    
+
     // Game assets i.e. blocks
     blocks[0].append(L"..X.");
     blocks[0].append(L"..X.");
@@ -65,6 +67,26 @@ int main()
     blocks[6].append(L".X..");
     blocks[6].append(L".X..");
 
+    pField = new unsigned char[screenArea];
+    for (int x = 0; x < fieldWidth; x++){
+        for (int y = 0; y < fieldHeight; y++){
+            pField[y*fieldWidth + x] = (x == 0 || x == fieldWidth - 1 || y == fieldHeight - 1) ? 9 : 0;
+        }
+    }
+
+    bool bKey[4];
+    int currentPiece = 0;
+    int currentRotation = 0;
+    int currentX = fieldWidth / 2;
+    int currentY = 0;
+    int speed = 20;
+    int speedCount = 0;
+    int pieceCount = 0;
+    int score = 0;
+    bool bForceDown = false;
+    bool bRotateHold = true;
+    bool bGameOver = false;
+    vector<int> vLines;
 
 
     return 0;
