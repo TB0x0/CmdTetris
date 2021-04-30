@@ -88,6 +88,20 @@ int main()
     bool bGameOver = false;
     vector<int> vLines;
 
+    while (!bGameOver){
+        this_thread::sleep_for(50ms);
+        speedCount++;
+        bForceDown = (speedCount == speed);
+
+        for (int k = 0; k < 4; k++){
+            bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28Z"[k]))) != 0;
+        }
+
+        if (bKey[3]){
+            currentRotation += (bRotateHold && pieceFits(currentPiece, currentRotation, currentX + 1, currentY)) ? 1 : 0;
+            bRotateHold = false;
+        }
+    }
 
     return 0;
 }
