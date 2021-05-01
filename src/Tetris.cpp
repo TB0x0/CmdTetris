@@ -3,9 +3,11 @@
 
 #include <iostream>
 #include <vector>
+#include <thread>
 
 using namespace std;
 
+#include <stdio.h>
 #include <Windows.h>
 
 wstring blocks[7];
@@ -124,14 +126,14 @@ int main()
             else{
                 for (int x = 0; x < 4; x++){
                     for (int y = 0; y < 4; y++){
-                        if (block[currentPiece][rotateBlock(x, y, currentRotation)] != L'.'){
+                        if (blocks[currentPiece][rotateBlock(x, y, currentRotation)] != L'.'){
                             pField[(currentY + y) * fieldWidth + (currentX + x)] = currentPiece + 1;
                         }
                     }
                 }
 
                 for (int y = 0; y < 4; y++){
-                    
+
                 }
             }
         }
