@@ -97,9 +97,43 @@ int main()
             bKey[k] = (0x8000 & GetAsyncKeyState((unsigned char)("\x27\x25\x28Z"[k]))) != 0;
         }
 
+        currentX += (bKey[0] && pieceFits(currentPiece, currentRotation, currentX + 1, currentY)) ? 1 : 0;
+        currentX -= (bKey[1] && pieceFits(currentPiece, currentRotation, currentX - 1, currentY)) ? 1 : 0;
+        currentY += (bKey[2] && pieceFits(currentPiece, currentRotation, currentX, currentY + 1)) ? 1 : 0;
+        
         if (bKey[3]){
             currentRotation += (bRotateHold && pieceFits(currentPiece, currentRotation, currentX + 1, currentY)) ? 1 : 0;
             bRotateHold = false;
+        }
+        else{
+            bRotateHold = true;
+        }
+
+        if (bForceDown){
+            speedCount = 0;
+            pieceCount++;
+            if (pieceCount % 50 == 0){
+                if (speed >= 10){
+                    speed--;
+                }
+            }
+
+            if (pieceFits(currentPiece, currentRotation, currentX, currentY + 1)){
+                currentY++;
+            }
+            else{
+                for (int x = 0; x < 4; x++){
+                    for (int y = 0; y < 4; y++){
+                        if (block[currentPiece][rotateBlock(x, y, currentRotation)] != L'.'){
+                            pField[(currentY + y) * fieldWidth + (currentX + x)] = currentPiece + 1;
+                        }
+                    }
+                }
+
+                for (int y = 0; y < 4; y++){
+                    
+                }
+            }
         }
     }
 
