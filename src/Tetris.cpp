@@ -25,7 +25,7 @@ int main()
 {
     // Code to create the screen buffer
     int screenArea = screenWidth*screenHeight;
-    wchar_t *screen = new wchar_t[];
+    wchar_t *screen = new wchar_t[screenArea];
     for (int i = 0; i < screenArea; i++){
         screen[i] = L' ';
     }
